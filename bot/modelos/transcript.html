@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Transcript #__NUMERO__ · Operação Brasil</title>
+<style>
+  :root{
+    --bg:#101722; --bg2:#0b111a; --card:#1d2939; --card2:#172131; --linha:#2a3a50;
+    --texto:#e6edf5; --suave:#94a3b8; --ciano:#38bdf8; --verde:#22c55e; --erro:#ef4444; --ambar:#f59e0b;
+    --raio:14px; --fonte:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--bg2)}
+  html,body{margin:0;background-color:var(--bg2);background-image:radial-gradient(1200px 600px at 20% -10%,#16243a 0%,var(--bg) 55%,var(--bg2) 100%);background-attachment:fixed;
+    color:var(--texto);font-family:var(--fonte);font-size:15px;line-height:1.5;min-height:100vh}
+  a{color:var(--ciano);text-decoration:none} a:hover{text-decoration:underline}
+  .oculto{display:none!important}
+
+  /* ---------- Tela de senha ---------- */
+  #trava{min-height:100vh;display:grid;place-items:center;padding:24px}
+  .cofre{width:100%;max-width:420px;background:linear-gradient(180deg,var(--card),var(--card2));
+    border:1px solid var(--linha);border-radius:20px;padding:32px 28px;box-shadow:0 30px 80px -20px #000a;text-align:center}
+  .escudo{width:72px;height:72px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 30% 30%,#38bdf833,#38bdf80d);border:1px solid #38bdf855;font-size:34px}
+  .cofre h1{font-size:20px;margin:6px 0 4px} .cofre p{color:var(--suave);margin:0 0 20px;font-size:14px}
+  .campo{display:flex;gap:8px}
+  .campo input{flex:1;min-width:0;padding:13px 14px;border-radius:12px;border:1px solid var(--linha);background:#0d1520;
+    color:var(--texto);font-size:17px;letter-spacing:2px;text-transform:uppercase;font-family:ui-monospace,Consolas,monospace;outline:none}
+  .campo input:focus{border-color:var(--ciano);box-shadow:0 0 0 3px #38bdf833}
+  button{cursor:pointer;border:0;border-radius:12px;padding:0 18px;font-weight:600;font-size:15px;font-family:var(--fonte)}
+  .primario{background:var(--ciano);color:#062033} .primario:hover{filter:brightness(1.08)}
+  .primario:disabled{opacity:.6;cursor:wait}
+  .erro{color:var(--erro);font-size:13px;margin-top:12px;min-height:18px}
+  .tremer{animation:tremer .35s}
+  @keyframes tremer{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+  .rodape-cofre{margin-top:18px;font-size:12px;color:var(--suave)}
+
+  /* ---------- Transcript ---------- */
+  #conteudo{max-width:980px;margin:0 auto;padding:28px 18px 60px}
+  .topo{background:linear-gradient(135deg,#1d2939,#14202f);border:1px solid var(--linha);border-radius:var(--raio);
+    padding:22px 24px;position:relative;overflow:hidden}
+  .topo::after{content:"";position:absolute;inset:auto -60px -60px auto;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,#38bdf822,transparent 70%)}
+  .marca{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--ciano);font-weight:700}
+  .topo h2{margin:6px 0 2px;font-size:24px} .sub{color:var(--suave);font-size:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{background:#0d1520;border:1px solid var(--linha);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--texto)}
+  .chip b{color:var(--suave);font-weight:500;margin-right:4px}
+  .barra{display:flex;gap:10px;align-items:center;margin:18px 0 10px;flex-wrap:wrap}
+  .barra input{flex:1;min-width:200px;padding:10px 14px;border-radius:12px;border:1px solid var(--linha);background:var(--card2);
+    color:var(--texto);outline:none} .barra input:focus{border-color:var(--ciano)}
+  .contador{color:var(--suave);font-size:13px}
+  .secundario{background:var(--card);color:var(--texto);border:1px solid var(--linha);padding:9px 14px}
+  .lista{background:var(--card2);border:1px solid var(--linha);border-radius:var(--raio);padding:6px 0}
+  .msg{display:flex;gap:14px;padding:10px 18px}
+  .msg:hover{background:#ffffff06}
+  .msg.cont{padding-top:2px}
+  .msg.cont .av{visibility:hidden;height:0}
+  .msg.cont .cab{display:none}
+  .av{width:40px;height:40px;border-radius:50%;flex:0 0 40px;background:#2a3a50;display:grid;place-items:center;
+    font-weight:700;color:var(--texto);overflow:hidden}
+  .av img{width:100%;height:100%;object-fit:cover}
+  .corpo{min-width:0;flex:1}
+  .cab{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .nome{font-weight:600} .tag{font-size:10px;background:#5865f2;color:#fff;border-radius:4px;padding:1px 5px;font-weight:700}
+  .hora{color:var(--suave);font-size:12px}
+  .txt{white-space:normal;word-wrap:break-word;overflow-wrap:anywhere}
+  .txt code{background:#0d1520;border:1px solid var(--linha);border-radius:6px;padding:1px 5px;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+  .txt pre{background:#0d1520;border:1px solid var(--linha);border-radius:10px;padding:10px 12px;overflow:auto;margin:6px 0}
+  .txt pre code{border:0;padding:0;background:none}
+  .txt blockquote{margin:4px 0;padding-left:10px;border-left:3px solid #4b5c74;color:#cbd5e1}
+  .mencao{background:#38bdf826;color:#bae6fd;border-radius:4px;padding:0 3px}
+  .spoiler{background:#0a0f17;color:transparent;border-radius:4px;cursor:pointer}
+  .spoiler.aberto{background:#ffffff14;color:inherit}
+  .embed{margin-top:6px;max-width:560px;background:#141d2a;border-left:4px solid var(--ciano);border-radius:6px;padding:10px 14px}
+  .embed .e-autor{font-size:12px;color:var(--suave);margin-bottom:2px}
+  .embed .e-tit{font-weight:700;margin-bottom:4px}
+  .embed .e-campos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 14px;margin-top:8px}
+  .embed .e-campo{grid-column:1/-1} .embed .e-campo.inline{grid-column:auto}
+  .embed .e-campo b{display:block;font-size:13px}
+  .embed .e-rod{margin-top:8px;font-size:12px;color:var(--suave)}
+  .anexos{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+  .anexos img{max-width:360px;max-height:280px;border-radius:10px;border:1px solid var(--linha);cursor:zoom-in;display:block}
+  .arq{display:flex;align-items:center;gap:10px;background:#141d2a;border:1px solid var(--linha);border-radius:10px;padding:8px 12px;font-size:13px}
+  .arq small{color:var(--suave)}
+  .vazio{padding:30px;text-align:center;color:var(--suave)}
+  .fim{text-align:center;color:var(--suave);font-size:12px;margin-top:22px}
+  #zoom{position:fixed;inset:0;background:#000d;display:grid;place-items:center;z-index:9;cursor:zoom-out}
+  #zoom img{max-width:94vw;max-height:92vh;border-radius:10px}
+  mark{background:#f59e0b55;color:inherit;border-radius:3px}
+  @media (max-width:640px){.anexos img{max-width:100%}.embed .e-campos{grid-template-columns:1fr}}
+  @media print{body{background:#fff;color:#000}.barra,#zoom{display:none!important}.lista,.topo{border-color:#ccc;background:#fff}}
+</style>
+</head>
+<body>
+<section id="trava">
+  <form class="cofre" id="form" autocomplete="off">
+    <div class="escudo">🔒</div>
+    <div class="marca">Operação Brasil</div>
+    <h1>Transcript protegido #__NUMERO__</h1>
+    <p>Digite a senha que você recebeu por mensagem privada do bot.</p>
+    <div class="campo">
+      <input id="senha" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" spellcheck="false" autofocus aria-label="Senha">
+      <button class="primario" id="abrir" type="submit">Abrir</button>
+    </div>
+    <div class="erro" id="erro" role="alert"></div>
+    <div class="rodape-cofre">🛡️ O conteúdo é criptografado (AES-256) e só é decifrado aqui, no seu navegador.<br>O conteúdo da conversa não sai do seu computador.</div>
+  </form>
+</section>
+
+<main id="conteudo" class="oculto">
+  <header class="topo">
+    <div class="marca">Operação Brasil · Transcript</div>
+    <h2 id="titulo"></h2>
+    <div class="sub" id="subtitulo"></div>
+    <div class="chips" id="chips"></div>
+  </header>
+  <div class="barra">
+    <input id="busca" placeholder="🔎 Buscar na conversa…" aria-label="Buscar">
+    <span class="contador" id="contador"></span>
+    <button class="secundario" type="button" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  </div>
+  <section class="lista" id="lista"></section>
+  <div class="fim">Documento confidencial · gerado automaticamente pelo bot Operação Brasil · não compartilhe a senha.</div>
+</main>
+<div id="zoom" class="oculto"><img alt=""></div>
+
+<script>
+const PACOTE = __PACOTE__;
+const $ = s => document.querySelector(s);
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let DADOS = null;
+
+async function decifrar(senha){
+  const enc = new TextEncoder();
+  const base = await crypto.subtle.importKey("raw", enc.encode(senha), "PBKDF2", false, ["deriveKey"]);
+  const chave = await crypto.subtle.deriveKey(
+    {name:"PBKDF2", salt:b64(PACOTE.salt), iterations:PACOTE.iter, hash:"SHA-256"},
+    base, {name:"AES-GCM", length:256}, false, ["decrypt"]);
+  const claro = await crypto.subtle.decrypt({name:"AES-GCM", iv:b64(PACOTE.iv)}, chave, b64(PACOTE.ct));
+  return JSON.parse(new TextDecoder().decode(claro));
+}
+
+const campoSenha = $("#senha");
+campoSenha.addEventListener("input", () => {
+  const limpo = campoSenha.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16);
+  campoSenha.value = limpo.match(/.{1,4}/g)?.join("-") ?? "";
+});
+
+$("#form").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const btn = $("#abrir"), erro = $("#erro");
+  if (!window.crypto?.subtle){ erro.textContent = "Seu navegador não suporta a abertura segura. Use Chrome, Edge ou Firefox atualizados."; return; }
+  btn.disabled = true; btn.textContent = "…"; erro.textContent = "";
+  try {
+    DADOS = await decifrar(campoSenha.value.trim().toUpperCase());
+    $("#trava").classList.add("oculto"); $("#conteudo").classList.remove("oculto");
+    renderizar();
+  } catch (e) {
+    erro.textContent = "Senha incorreta. Confira a mensagem privada do bot.";
+    const c = $(".cofre"); c.classList.remove("tremer"); void c.offsetWidth; c.classList.add("tremer");
+  } finally { btn.disabled = false; btn.textContent = "Abrir"; }
+});
+
+function fmtData(iso){
+  if (!iso) return "";
+  return new Date(iso).toLocaleString("pt-BR", {day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit"});
+}
+function tamanho(n){ return n > 1048576 ? (n/1048576).toFixed(1)+" MB" : Math.max(1, Math.round(n/1024))+" KB"; }
+
+function markdown(texto){
+  const pessoas = DADOS.pessoas || {};
+  const blocos = [];
+  let s = esc(texto).replace(/```(?:[a-z0-9]+\n)?([\s\S]*?)```/gi, (_, c) => { blocos.push(c); return `\u0000${blocos.length-1}\u0000`; });
+  s = s.replace(/`([^`\n]+)`/g, "<code>$1</code>")
+       .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+       .replace(/__([^_]+)__/g, "<u>$1</u>")
+       .replace(/\*([^*\n]+)\*/g, "<i>$1</i>")
+       .replace(/~~([^~]+)~~/g, "<s>$1</s>")
+       .replace(/\|\|([^|]+)\|\|/g, '<span class="spoiler" onclick="this.classList.toggle(\'aberto\')">$1</span>')
+       .replace(/&lt;@!?(\d+)&gt;/g, (_, id) => `<span class="mencao">@${esc(pessoas[id]?.nome || "usuário")}</span>`)
+       .replace(/&lt;@&amp;(\d+)&gt;/g, '<span class="mencao">@cargo</span>')
+       .replace(/&lt;#(\d+)&gt;/g, '<span class="mencao">#canal</span>')
+       .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>')
+       .replace(/^&gt;&gt;&gt; ([\s\S]*)$/m, "<blockquote>$1</blockquote>")
+       .replace(/^&gt; (.*)$/gm, "<blockquote>$1</blockquote>")
+       .replace(/\n/g, "<br>");
+  return s.replace(/\u0000(\d+)\u0000/g, (_, i) => `<pre><code>${blocos[+i]}</code></pre>`);
+}
+
+function avatar(p){
+  const ini = esc((p?.nome || "?").trim().charAt(0).toUpperCase());
+  if (!p?.avatar) return `<div class="av">${ini}</div>`;
+  return `<div class="av"><img src="${esc(p.avatar)}" alt="" referrerpolicy="no-referrer" onerror="this.parentNode.textContent='${ini}'"></div>`;
+}
+
+function embedHtml(e){
+  const campos = (e.campos || []).map(f => `<div class="e-campo ${f.inline ? "inline" : ""}"><b>${markdown(f.nome)}</b>${markdown(f.valor)}</div>`).join("");
+  const tit = e.titulo ? (e.url ? `<a href="${esc(e.url)}" target="_blank" rel="noopener noreferrer">${esc(e.titulo)}</a>` : esc(e.titulo)) : "";
+  return `<div class="embed" style="border-left-color:${esc(e.cor)}">
+    ${e.autor ? `<div class="e-autor">${esc(e.autor)}</div>` : ""}
+    ${tit ? `<div class="e-tit">${tit}</div>` : ""}
+    ${e.descricao ? `<div class="txt">${markdown(e.descricao)}</div>` : ""}
+    ${campos ? `<div class="e-campos">${campos}</div>` : ""}
+    ${e.rodape ? `<div class="e-rod">${esc(e.rodape)}</div>` : ""}</div>`;
+}
+
+function anexoHtml(a){
+  if (a.dados) return `<img src="${a.dados}" alt="${esc(a.nome)}" title="${esc(a.nome)}" onclick="ampliar(this.src)">`;
+  return `<div class="arq">📎 <span>${esc(a.nome)}<br><small>${tamanho(a.tamanho || 0)}${a.aviso ? " · " + esc(a.aviso) : " · arquivo não incluído por segurança"}</small></span></div>`;
+}
+
+function ampliar(src){ const z = $("#zoom"); z.querySelector("img").src = src; z.classList.remove("oculto"); }
+$("#zoom").addEventListener("click", () => $("#zoom").classList.add("oculto"));
+
+function renderizar(){
+  const c = DADOS.cabecalho || {};
+  document.title = `${c.titulo || "Transcript"} · Operação Brasil`;
+  $("#titulo").textContent = c.titulo || "Transcript";
+  $("#subtitulo").textContent = c.subtitulo || "";
+  $("#chips").innerHTML = (c.chips || []).map(([k, v]) => `<span class="chip"><b>${esc(k)}</b>${esc(v)}</span>`).join("");
+  desenhar("");
+  $("#busca").addEventListener("input", ev => desenhar(ev.target.value.trim().toLowerCase()));
+}
+
+function desenhar(filtro){
+  const pessoas = DADOS.pessoas || {};
+  let anterior = null, total = 0;
+  const html = DADOS.mensagens.map(m => {
+    const p = pessoas[m.autor] || {nome:"Desconhecido"};
+    const bruto = [m.texto, ...(m.embeds||[]).flatMap(e => [e.titulo, e.descricao, ...(e.campos||[]).map(f => f.nome+" "+f.valor)]), p.nome].join(" ").toLowerCase();
+    if (filtro && !bruto.includes(filtro)) { anterior = null; return ""; }
+    total++;
+    const cont = anterior && anterior.autor === m.autor && (new Date(m.data) - new Date(anterior.data)) < 5*60*1000;
+    anterior = m;
+    let texto = m.texto ? markdown(m.texto) : "";
+    if (filtro && texto) texto = texto.replace(new RegExp(`(${filtro.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})(?![^<]*>)`, "gi"), "<mark>$1</mark>");
+    return `<article class="msg ${cont ? "cont" : ""}">
+      ${avatar(p)}
+      <div class="corpo">
+        <div class="cab"><span class="nome">${esc(p.nome)}</span>${p.bot ? '<span class="tag">BOT</span>' : ""}<span class="hora">${fmtData(m.data)}${m.editada ? " · editada" : ""}</span></div>
+        ${texto ? `<div class="txt">${texto}</div>` : ""}
+        ${(m.embeds||[]).map(embedHtml).join("")}
+        ${(m.anexos||[]).length ? `<div class="anexos">${m.anexos.map(anexoHtml).join("")}</div>` : ""}
+      </div></article>`;
+  }).join("");
+  $("#lista").innerHTML = html || '<div class="vazio">Nenhuma mensagem encontrada.</div>';
+  $("#contador").textContent = `${total} mensage${total === 1 ? "m" : "ns"}`;
+}
+</script>
+</body>
+</html>

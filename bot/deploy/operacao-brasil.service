@@ -1,0 +1,21 @@
+[Unit]
+Description=Bot Operação Brasil (Discord)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=operacao
+WorkingDirectory=/opt/operacao-brasil
+ExecStart=/opt/operacao-brasil/.venv/bin/python -m bot
+Restart=always
+RestartSec=10
+# Endurecimento básico
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/opt/operacao-brasil/bot/dados
+
+[Install]
+WantedBy=multi-user.target

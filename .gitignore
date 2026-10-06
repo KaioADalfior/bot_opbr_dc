@@ -1,0 +1,20 @@
+# Segredos
+.env
+.env.*
+!.env.example
+
+# Ambiente Python
+.venv/
+.venv*/
+__pycache__/
+*.pyc
+
+# Saídas locais (podem conter IDs do servidor)
+logs/
+relatorios/
+estado/*.json
+estado/*.tmp
+
+# Bot
+bot/.env
+bot/dados/
